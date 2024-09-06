@@ -6,10 +6,11 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-@Data
+
 @Entity
-@Table(name = "bookings")
-public class Booking {
+@Table(name = "reviews")
+@Data
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,13 +23,10 @@ public class Booking {
     @JoinColumn(name = "property_id")
     private Property property;
 
-    private LocalDateTime checkInDate;
+    private int rating; // Scale 1 to 5
 
-    private LocalDateTime checkOutDate;
-
-    @ManyToOne
-    @JoinColumn(name = "status_id")
-    private Status status; // Sử dụng bảng Status để quản lý trạng thái
+    @Lob
+    private String comment;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp

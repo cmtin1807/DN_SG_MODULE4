@@ -4,12 +4,20 @@ package com.codegym.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Set;
+
 @Entity
-@Table(name = "room_type")
 @Data
-public class RoomType {
+@Table(name = "roles")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+
+    // Constructors, getters and setters
 }

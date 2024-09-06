@@ -6,29 +6,20 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-@Data
+
 @Entity
-@Table(name = "bookings")
-public class Booking {
+@Data
+@Table(name = "booking_status")
+public class BookingStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "guest_id")
-    private User guest;
+    private String status; // Booked, Cancelled, Completed
 
     @ManyToOne
-    @JoinColumn(name = "property_id")
-    private Property property;
-
-    private LocalDateTime checkInDate;
-
-    private LocalDateTime checkOutDate;
-
-    @ManyToOne
-    @JoinColumn(name = "status_id")
-    private Status status; // Sử dụng bảng Status để quản lý trạng thái
+    @JoinColumn(name = "booking_id")
+    private Booking booking;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
